@@ -2,10 +2,20 @@
 
 
 {% block content %}
+<div class="container">
+    <div class="container text-center">
+        <p> <h1>Статьи Блога:</h1> </p>
+    </div>
     {% for post in object_list %}
-        <div class="post-entry">
+    <div class="card my-2" >
+        <div class="card-body">
+<!--        <div class="post-entry">-->
             <h2><a href="{% url 'blog:post_detail' post.pk %}">{{ post.title }}</a></h2>
-            <p>{{ post.body }}</p>
+            <p>{{ post.body|truncatewords:22|safe }}</p>
+            <p>{{ post.create_date|date:'d-m-Y' }}</p>
+<!--        </div>-->
         </div>
+    </div>
     {% endfor %}
+</div>
 {% endblock content %}

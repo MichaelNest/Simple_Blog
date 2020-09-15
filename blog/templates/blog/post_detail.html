@@ -2,19 +2,30 @@
 
 
 {% block content %}
-    <div class="post-entry">
+<div class="container padding">
+<div class="col-md-12 col-md-offset-2">
+    <div class="card" >
         {% if post.image %}
-            <p><img src="{{ post.image.url }}" class="card-img-top" alt="..."></p>
+            <p><img src="{{post.image.url}}" class="card-img-top" alt="..."></p>
         {% endif %}
+
+        <div class="card-body">
+<!--    <div class="post-entry">-->
+<!--        {% if post.image %}-->
+<!--            <p><img src="{{ post.image.url }}" class="card-img-top" alt="..."></p>-->
+<!--        {% endif %}-->
         <h2>{{ post.title }}</h2>
         <p>{{ post.body }}</p>
         <p>{{ post.create_date|date:'d-m-Y' }}</p>
-    </div>
+<!--    </div>-->
     {% if user.is_authenticated %}
         <p><a href="{% url 'blog:post_edit' post.pk %}">+ Edit Post </a></p>
         <p><a href="{% url 'blog:post_delete' post.pk %}">+ Delete Post</a></p>
     {% else %}
         <h5><a href="{% url 'login' %}">Please login for Edit article</a></h5>
     {% endif %}
-    
+        </div>
+    </div>
+</div>
+</div>
 {% endblock content %}
