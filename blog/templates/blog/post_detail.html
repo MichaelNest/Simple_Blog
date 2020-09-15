@@ -3,6 +3,9 @@
 
 {% block content %}
     <div class="post-entry">
+        {% if post.image %}
+            <p><img src="{{ post.image.url }}" class="card-img-top" alt="..."></p>
+        {% endif %}
         <h2>{{ post.title }}</h2>
         <p>{{ post.body }}</p>
         <p>{{ post.create_date|date:'d-m-Y' }}</p>
