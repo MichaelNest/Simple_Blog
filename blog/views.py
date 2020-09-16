@@ -6,6 +6,9 @@ from .models import Post
 
 class BlogListView(ListView):
     model = Post
+    queryset = Post.objects.all()
+    # context_object_name = 'posts'
+    paginate_by = 3
     template_name = 'blog/home.html'
 
 class BlogDetailView(DetailView):
