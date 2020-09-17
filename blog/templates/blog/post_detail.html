@@ -5,19 +5,18 @@
 <div class="container padding">
 <div class="col-md-12 col-md-offset-2">
     <div class="card" >
+        <div class="text-center">
         {% if post.image %}
-            <p><img src="{{post.image.url}}" class="card-img-fluid" alt="..."></p>
+            <p><img src="{{post.image.url}}" style="max-width:500px; max-height:500px;" class="card-img-fluid" alt="..."></p>
         {% endif %}
-
+        </div>
         <div class="card-body">
-<!--    <div class="post-entry">-->
-<!--        {% if post.image %}-->
-<!--            <p><img src="{{ post.image.url }}" class="card-img-top" alt="..."></p>-->
-<!--        {% endif %}-->
+    <div class="post-entry">
         <h2>{{ post.title }}</h2>
         <p>{{ post.body }}</p>
-        <p>{{ post.create_date|date:'d-m-Y' }}</p>
-<!--    </div>-->
+        <p>Автор: {{ post.author }} / {{ post.create_date|date:'d-m-Y' }}</p>
+        <p><a href="{% url 'blog:home' %}" role="button" class="btn btn-primary">Назад</a></p>
+
     {% if user.is_authenticated %}
         <p><a href="{% url 'blog:post_edit' post.pk %}">+ Edit Post </a></p>
         <p><a href="{% url 'blog:post_delete' post.pk %}">+ Delete Post</a></p>
@@ -26,6 +25,7 @@
     {% endif %}
         </div>
     </div>
+</div>
 </div>
 </div>
 {% endblock content %}
