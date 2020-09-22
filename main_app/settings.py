@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '&mjmz7_8q6l%yrk(*5pa&!8gb&x8@_
 # DEBUG = True
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
-ALLOWED_HOSTS = ['stormy-anchorage-52761.herokuapp.com/', '127.0.0.1']
+ALLOWED_HOSTS = ['stormy-anchorage-52761.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
