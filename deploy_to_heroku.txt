@@ -1,0 +1,60 @@
+1) Prepare site for deploy to heroku
+    import os
+    SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'old_secret_key')
+    DEBUG = bool(os.environ.het('DJANGO_DEBUG', True))
+
+--- python manage.py check --deploy --- list with oll settings for deploy
+
+2) git.init, git add -A; git.commit -m 'any text comment'; git clone 'addres GitHub-repository '; create file gitignore;
+git push origin master
+
+3) Create file Procfile in root of project; add to Procfile this string: web: gunicorn core_project_app.wsgi --log-file -
+4) pip install gunicorn
+5) pip install dj-database-url
+6) pip install psycopg2-binary
+7) Add to file setting.py next strings:
+    import dj_database_url
+    db_from_env = dj_database_url.config(conn_max_age=500)
+    DATABASES['default'].update(db_from_env)
+8) Add to file settings.py STATIC_ROOT=os.path.join(BASE_DIR, 'staticfiles'); STATIC_URL='/static/'
+9) pip install whitenoise
+10) Add to file setting.py next strings:
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',...]
+11) Add to file setting.py next strings:
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+12) Add to file setting.py next strings:
+INSTALLED_APPS = [
+    ...
+    'django.contrib.messages',
+    'whitenoise.runserver_nostatic',...]
+13) pip3 freeze > requirements.txt
+14) Remove string pkg-resources==0.0.0; add psycopg2-binary:
+asgiref==3.2.10
+dj-database-url==0.5.0
+Django==3.0.9
+gunicorn==20.0.4
+Pillow==7.2.0
+psycopg2-binary==2.8.6
+pytz==2020.1
+sqlparse==0.3.1
+whitenoise==5.2.0
+15)Create file runtime.txt --- add to him python-version: python-3.8.2
+16) Check site on local-server: python manage.py runserver 8001
+17) git add --all; git commit -m 'any text'; git push origin master;
+18) Create heroku account, load heroku client
+19) heroku create 'any name site'
+20) git push heroku master --- launch site to heroku
+21) heroku run python manage.py makemigrations
+22) heroku run python manage.py migrate
+23) heroku run python manage.py createsuperuser
+24) heroku open --- open site
+25) heroku addons --- watch my addons
+26) heroku config --- watch my configs
+27) heroku config:set DJANGO_SECRET_KEY='eu09(ilk6@4sfdofb=b_2ht@vad*$ehh9-)3u_83+y%(+phh' --- setting new csrf-key
+28) heroku config:set DJANGO_DEBUG='' --- setting DEBUG=False
+29) Add to ALLOWED_HOSTS our hosts:
+    ALLOWED_HOSTS = ['fathomless-scrubland-30645.herokuapp.com','127.0.0.1']
+30) git add --all; git commit -m 'any text'; git push origin master; git push heroku master
+31 heroku maintenance:on/off - activate and deactivate setting-mode of site
